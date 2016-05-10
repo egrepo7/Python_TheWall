@@ -1,0 +1,38 @@
+* {
+	margin: 0px auto;
+	padding: 0px auto;
+}
+
+#container {
+	width: 970px;
+
+}
+
+#reglog {
+	width: 50%;
+	height:300px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+#register {
+	display:inline-block;
+	width: 45%;
+	height: 100%;
+	vertical-align: top;
+	/*border: 1px solid black;*/
+	margin-left: 20px;
+	
+}
+
+#login {
+	display: inline-block;
+	width: 45%;
+	height:100%;
+	vertical-align: top;
+	/*border: 1px solid black;*/
+}
+
+#login input {
+	text-align:right;
+}

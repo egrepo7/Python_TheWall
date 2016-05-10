@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>The Wall!</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>Coding Dojo Wall</h1>
+			<h3>Welcome {{ session['active_name'] }}!</h3>
+			<a href="/logout">Log Out</a>
+		</div>
+		<hr>
+		<div id="post_message">
+			<h4>Post a Message</h4>
+			<form action="/usermessage/{{session['active_id']}}" method="POST">
+				<textarea name="messagebox" cols="120" rows="10"></textarea>
+				<input type="submit" value="Post a Message">
+			</form>
+		</div>	
+		{% for message in messages %}
+			<div class="message_style">
+				<p>{{ message['first_name'] }} {{message['last_name'] }} - {{ message['created_at'] }}</p>
+				<p>{{ message['message'] }}</p>
+				{% if session['active_id'] == message['user_id'] %}
+					<a href="/deletemessage/{{message['id']}}/{{message['user_id']}}"><button>Delete</button></a>
+				{% endif%}
+			</div>
+		{% for comment in comments %}	
+		{% if message['id'] == comment['message_id'] %}
+			<div class="comment_style">
+					<p>{{ comment['first_name'] }} {{ comment['last_name'] }} - {{ comment['created_at'] }}</p>
+					<p>{{comment['comment']}}</p>
+				{% endif %}
+				{% if session['active_id'] == comment['user_id'] %}
+					<a href="/deletecomment/{{ comment['id'] }}/{{ comment['user_id'] }}"><button>Delete</button></a>
+				{% endif %}
+			{% endfor %}	
+			</div>	
+			<div id="post_comment">
+				<h5>Post a Comment</h5>
+				<form action="/usercomment" method="POST">
+					<input type="hidden" name="message_id" value="{{ message['id'] }}">
+					<textarea name="commentbox" cols="100" rows="6"></textarea>
+					<input type="submit" value="Post a Comment">
+				</form>
+			</div>
+		{% endfor %}
+	</div>	
+</body>
+</html>
